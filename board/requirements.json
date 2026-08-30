@@ -25,6 +25,7 @@
   "derivation": {
     "method": "BRIEF.md was read and split; no design decision was taken. Every fixed_requirements entry, and every spec-table row sourced from the brief, carries a quotation that was checked by literal substring match against the brief bytes digested above. The build refuses to emit this file if any quotation is not found.",
     "quotations_verified": 23,
+    "where_the_quotations_are": "Every one of them is in this file: fixed_requirements[].brief_evidence and brief_spec_rows[].brief_evidence. The count above is the sum of those two lists, so it is recomputable from this repository alone - re-read BRIEF.md and check each string is a substring of it. brief_spec_rows carries the quotations behind the README's spec table, which would otherwise cite the brief with the evidence left in a build script.",
     "review": "two rounds of adversarial review against the brief, looking for invented requirements, lost requirements, evidence supporting a weaker claim than the one made beside it, and worksheet questions that presuppose their own answer"
   },
   "fixed_requirements": [
@@ -92,6 +93,58 @@
       "id": "REQ-13",
       "requirement": "This repository stays a consumer of the shared PCBA_AutoDesignAndTest toolkit; board-specific logic must not be pushed into the toolkit.",
       "brief_evidence": "The repository should remain a consumer of the shared `PCBA_AutoDesignAndTest` toolkit rather than accumulating board-specific logic in the toolkit."
+    }
+  ],
+  "brief_spec_rows": [
+    {
+      "aspect": "Channel count and mix",
+      "value": "Two 4–20 mA inputs and two 4–20 mA outputs (four channels total)",
+      "brief_evidence": "Design a 24 V industrial module with two 4–20 mA inputs and two 4–20 mA outputs."
+    },
+    {
+      "aspect": "System voltage domain",
+      "value": "A 24 V industrial module; the brief fixes the nominal domain at 24 V and states no supply tolerance window",
+      "brief_evidence": "Design a 24 V industrial module"
+    },
+    {
+      "aspect": "Isolation boundary",
+      "value": "Logic/host side galvanically isolated from field wiring",
+      "brief_evidence": "The logic/host side shall be galvanically isolated from field wiring."
+    },
+    {
+      "aspect": "Input fault tolerance",
+      "value": "Inputs should tolerate common wiring faults expected in a 24 V cabinet (which faults are not enumerated)",
+      "brief_evidence": "Inputs should tolerate common wiring faults expected in a 24 V cabinet"
+    },
+    {
+      "aspect": "Output loop compliance",
+      "value": "At least 500 ohm loop load at nominal supply, qualified by \"when practical\"",
+      "brief_evidence": "outputs should support at least 500 ohm loop load at nominal supply when practical."
+    },
+    {
+      "aspect": "Host interface",
+      "value": "An isolated host interface, either UART or USB — the choice between them is not fixed",
+      "brief_evidence": "an isolated UART or USB host interface"
+    },
+    {
+      "aspect": "Calibration storage and status indication",
+      "value": "Both required on-board; storage medium, LED count and LED meanings are not fixed",
+      "brief_evidence": "Provide calibration storage, status LEDs, and an isolated UART or USB host interface."
+    },
+    {
+      "aspect": "Field protection placement",
+      "value": "Protection kept at the connector edge (a placement constraint, not a part choice)",
+      "brief_evidence": "Keep field protection at the connector edge"
+    },
+    {
+      "aspect": "Creepage and clearance",
+      "value": "Isolation barrier maintained with explicit creepage/clearance; the distances themselves are not stated",
+      "brief_evidence": "maintain the isolation barrier with explicit creepage/clearance"
+    },
+    {
+      "aspect": "Precision sense node routing",
+      "value": "Kelvin connections where applicable",
+      "brief_evidence": "route precision sense nodes as Kelvin connections where applicable."
     }
   ],
   "open_decisions": [
