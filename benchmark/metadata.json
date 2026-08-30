@@ -1,0 +1,16 @@
+{
+  "repo": "PCBA_4_20mA_IO",
+  "title": "Four-Channel 4\u201320 mA I/O Module",
+  "category": "industrial-analog",
+  "difficulty": 3,
+  "detail": 4,
+  "layers": "4",
+  "stress": [
+    "precision current loop",
+    "24V domains",
+    "protection",
+    "isolation"
+  ],
+  "benchmark_id": 11,
+  "brief_file": "BRIEF.md"
+}

@@ -1,0 +1,232 @@
+{
+  "schema_version": 1,
+  "repo": "PCBA_4_20mA_IO",
+  "board_id": "current_loop_io",
+  "benchmark_id": 11,
+  "title": "Four-Channel 4–20 mA I/O Module",
+  "description": "The split between what BRIEF.md fixes and what it leaves open. Every fixed_requirements entry carries the verbatim brief text that substantiates it, bound to the recorded brief digest. An open_decisions entry is a choice for the design agent: record it in 'chosen' with 'rationale', and never move it into fixed_requirements. Missing details are design freedom, not permission to fabricate unstated user requirements.",
+  "brief": {
+    "path": "../BRIEF.md",
+    "sha256": "7cf59b5f7204d3e280be2c89489fa2832001794b673967f96952d0f0d6f8157f",
+    "authority": "supplied by the benchmark; authoritative; preserved byte for byte and never edited"
+  },
+  "metadata": {
+    "category": "industrial-analog",
+    "difficulty": 3,
+    "detail": 4,
+    "layers": "4",
+    "stressors": [
+      "precision current loop",
+      "24V domains",
+      "protection",
+      "isolation"
+    ]
+  },
+  "derivation": {
+    "method": "BRIEF.md was read and split; no design decision was taken. Every fixed_requirements entry, and every spec-table row sourced from the brief, carries a quotation that was checked by literal substring match against the brief bytes digested above. The build refuses to emit this file if any quotation is not found.",
+    "quotations_verified": 23,
+    "review": "two rounds of adversarial review against the brief, looking for invented requirements, lost requirements, evidence supporting a weaker claim than the one made beside it, and worksheet questions that presuppose their own answer"
+  },
+  "fixed_requirements": [
+    {
+      "id": "REQ-01",
+      "requirement": "Provide exactly two 4–20 mA inputs and two 4–20 mA outputs.",
+      "brief_evidence": "two 4–20 mA inputs and two 4–20 mA outputs"
+    },
+    {
+      "id": "REQ-02",
+      "requirement": "The module is a 24 V industrial module.",
+      "brief_evidence": "Design a 24 V industrial module"
+    },
+    {
+      "id": "REQ-03",
+      "requirement": "The logic/host side must be galvanically isolated from field wiring.",
+      "brief_evidence": "The logic/host side shall be galvanically isolated from field wiring."
+    },
+    {
+      "id": "REQ-04",
+      "requirement": "Inputs should tolerate common wiring faults expected in a 24 V cabinet.",
+      "brief_evidence": "Inputs should tolerate common wiring faults expected in a 24 V cabinet"
+    },
+    {
+      "id": "REQ-05",
+      "requirement": "Outputs should support at least a 500 ohm loop load at nominal supply, when practical.",
+      "brief_evidence": "outputs should support at least 500 ohm loop load at nominal supply when practical."
+    },
+    {
+      "id": "REQ-06",
+      "requirement": "Provide on-board calibration storage.",
+      "brief_evidence": "Provide calibration storage, status LEDs"
+    },
+    {
+      "id": "REQ-07",
+      "requirement": "Provide status LEDs.",
+      "brief_evidence": "Provide calibration storage, status LEDs"
+    },
+    {
+      "id": "REQ-08",
+      "requirement": "Provide an isolated host interface — either UART or USB.",
+      "brief_evidence": "an isolated UART or USB host interface"
+    },
+    {
+      "id": "REQ-09",
+      "requirement": "Field protection must be placed at the connector edge.",
+      "brief_evidence": "Keep field protection at the connector edge"
+    },
+    {
+      "id": "REQ-10",
+      "requirement": "Maintain the isolation barrier with explicit creepage/clearance — the spacing is to be explicit rather than left implied; the brief states no distances.",
+      "brief_evidence": "maintain the isolation barrier with explicit creepage/clearance"
+    },
+    {
+      "id": "REQ-11",
+      "requirement": "Precision sense nodes must be routed as Kelvin connections where applicable.",
+      "brief_evidence": "route precision sense nodes as Kelvin connections where applicable."
+    },
+    {
+      "id": "REQ-12",
+      "requirement": "Stated brief requirements are authoritative; choices the brief leaves open must be made and documented as engineering decisions rather than back-filled as hidden user requirements.",
+      "brief_evidence": "Treat stated requirements as authoritative; where the brief leaves choices open, make and document reasonable engineering decisions rather than inventing hidden user requirements."
+    },
+    {
+      "id": "REQ-13",
+      "requirement": "This repository stays a consumer of the shared PCBA_AutoDesignAndTest toolkit; board-specific logic must not be pushed into the toolkit.",
+      "brief_evidence": "The repository should remain a consumer of the shared `PCBA_AutoDesignAndTest` toolkit rather than accumulating board-specific logic in the toolkit."
+    }
+  ],
+  "open_decisions": [
+    {
+      "id": "OPEN-01",
+      "decision": "Whether the isolated host interface is UART or USB.",
+      "why_open": "The brief explicitly offers both as alternatives (\"an isolated UART or USB host interface\") and does not pick one.",
+      "chosen": null,
+      "rationale": null
+    },
+    {
+      "id": "OPEN-02",
+      "decision": "How signals cross the isolation barrier — the isolation technology, the number of crossing channels, and their direction.",
+      "why_open": "The brief requires galvanic isolation but names no technology, part, or channel budget.",
+      "chosen": null,
+      "rationale": null
+    },
+    {
+      "id": "OPEN-03",
+      "decision": "How the field side is powered across the barrier, and whether field power is derived on-board or supplied externally.",
+      "why_open": "The brief states isolation but is silent on isolated power transfer; it says nothing about where field-side rails come from.",
+      "chosen": null,
+      "rationale": null
+    },
+    {
+      "id": "OPEN-04",
+      "decision": "The isolation working/withstand voltage the barrier is designed to, and the specific creepage and clearance dimensions that follow from it.",
+      "why_open": "The brief requires the spacing be \"explicit\" but states no voltage rating, pollution degree, or millimetre figure to derive it from.",
+      "chosen": null,
+      "rationale": null
+    },
+    {
+      "id": "OPEN-05",
+      "decision": "Whether a microcontroller or other digital controller is present, and which one.",
+      "why_open": "Calibration storage and a host interface imply digital housekeeping, but the brief never names or requires a controller, let alone a specific device.",
+      "chosen": null,
+      "rationale": null
+    },
+    {
+      "id": "OPEN-06",
+      "decision": "The input signal chain architecture — sense-resistor value, single-ended vs differential sensing, converter type and resolution, per-channel vs multiplexed conversion.",
+      "why_open": "The brief specifies only that the inputs are 4–20 mA and that precision sense nodes get Kelvin routing; the chain itself is unspecified.",
+      "chosen": null,
+      "rationale": null
+    },
+    {
+      "id": "OPEN-07",
+      "decision": "The output driver architecture — DAC plus voltage-to-current stage, an integrated loop driver, sourcing vs sinking, and whether loops are module-powered or externally powered.",
+      "why_open": "The brief fixes only the 500 ohm load target at nominal supply; it names no topology or part.",
+      "chosen": null,
+      "rationale": null
+    },
+    {
+      "id": "OPEN-08",
+      "decision": "The calibration storage medium, capacity, and the stored data format / calibration procedure.",
+      "why_open": "The brief says \"Provide calibration storage\" and stops there — no technology, size, or scheme.",
+      "chosen": null,
+      "rationale": null
+    },
+    {
+      "id": "OPEN-09",
+      "decision": "The accuracy, resolution, linearity, drift and temperature-coefficient targets, and the error budget that justifies them.",
+      "why_open": "The brief calls the sense nodes \"precision\" but states no numeric accuracy requirement anywhere.",
+      "chosen": null,
+      "rationale": null
+    },
+    {
+      "id": "OPEN-10",
+      "decision": "Which specific faults count as \"common wiring faults expected in a 24 V cabinet\", and the protection strategy and component classes that cover them.",
+      "why_open": "The brief names the fault class in words only — no fault list, no voltage/energy levels, no protection scheme.",
+      "chosen": null,
+      "rationale": null
+    },
+    {
+      "id": "OPEN-11",
+      "decision": "Field and host connector selection — type, pin count, pitch, wire gauge, pluggable vs fixed, and pinout.",
+      "why_open": "The brief locates protection at the connector edge but never says what the connectors are.",
+      "chosen": null,
+      "rationale": null
+    },
+    {
+      "id": "OPEN-12",
+      "decision": "Board outline, dimensions, and mechanical mounting or enclosure/rail fit.",
+      "why_open": "The brief gives no mechanical envelope, mounting scheme, or dimensional constraint at all.",
+      "chosen": null,
+      "rationale": null
+    },
+    {
+      "id": "OPEN-13",
+      "decision": "Stackup detail beyond the likely layer count — layer assignment, copper weights, dielectric choice, and whether any controlled impedance is needed.",
+      "why_open": "Only a likely layer count of 4 comes from metadata; the brief says nothing about stackup or impedance.",
+      "chosen": null,
+      "rationale": null
+    },
+    {
+      "id": "OPEN-14",
+      "decision": "Status LED count, colours, placement, and what each one indicates.",
+      "why_open": "The brief requires \"status LEDs\" in the plural and specifies nothing further.",
+      "chosen": null,
+      "rationale": null
+    },
+    {
+      "id": "OPEN-15",
+      "decision": "Field-side reference topology — whether all four channels share one field ground domain, or channels are isolated from each other.",
+      "why_open": "The brief isolates logic from field wiring but is silent on channel-to-channel relationships within the field side.",
+      "chosen": null,
+      "rationale": null
+    },
+    {
+      "id": "OPEN-16",
+      "decision": "Supply input handling — accepted input range around nominal, reverse-polarity and miswiring protection on the supply, and how on-board rails are generated.",
+      "why_open": "The brief names the 24 V context but gives no supply tolerance window, no polarity requirement, and no rail list.",
+      "chosen": null,
+      "rationale": null
+    },
+    {
+      "id": "OPEN-17",
+      "decision": "Worst-case power dissipation budget and the thermal approach, particularly for the output loop drivers.",
+      "why_open": "The brief is silent on thermal limits, ambient temperature, and enclosure conditions.",
+      "chosen": null,
+      "rationale": null
+    },
+    {
+      "id": "OPEN-18",
+      "decision": "Test, bring-up, calibration and programming access — test points, headers, and any self-test provisions.",
+      "why_open": "The brief mentions calibration storage but describes no calibration or test access mechanism.",
+      "chosen": null,
+      "rationale": null
+    },
+    {
+      "id": "OPEN-19",
+      "decision": "Environmental operating range and any standards, certification or EMC targets the module is designed against.",
+      "why_open": "The brief is simply silent on environment, standards and compliance.",
+      "chosen": null,
+      "rationale": null
+    }
+  ]
+}
